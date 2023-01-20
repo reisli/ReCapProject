@@ -40,7 +40,7 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        [CacheAspect(5)]
+        [CacheAspect(10)]
         public IDataResult<List<Car>> GetAll()
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll());
