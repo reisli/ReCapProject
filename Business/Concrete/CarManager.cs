@@ -3,6 +3,7 @@ using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Performance;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
@@ -12,8 +13,10 @@ using Entities.DTOs;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Business.Concrete
@@ -41,13 +44,16 @@ namespace Business.Concrete
         }
 
         [CacheAspect(10)]
+        [PerformanceAspect(0)]
         public IDataResult<List<Car>> GetAll()
         {
+            
             return new SuccessDataResult<List<Car>>(_carDal.GetAll());
         }
 
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
+            Thread.Sleep(2000);
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
         }
 

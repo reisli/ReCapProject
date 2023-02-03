@@ -26,11 +26,11 @@ namespace Business.Concrete
 
         public IResult Add(List<IFormFile> files,CarImage carImage)
         {
-            if (files.Count! > 0)
+            if (files.Count <= 0)
                 return new ErrorResult(Messages.FileNotFound);
 
             
-            var result = FileHelper.Upload(files, "").Data;
+            var result = FileHelper.Upload(files,ImagePaths.CarImagePath).Data;
 
             foreach (var path in result)
             {

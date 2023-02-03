@@ -14,14 +14,15 @@ namespace Core.Utilities.Helpers
         public static IDataResult<List<string>> Upload(List<IFormFile> files, string path)
         {
             List<string> result = new();
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
 
             foreach (var file in files)
             {
-                string imageName = Guid.NewGuid() + Path.GetExtension(file.FileName);
-                //path = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot/Images/{imageName}");
-                using var stream = new FileStream(path + imageName, FileMode.Create);
-                result.Add(imageName);
+                string imageName = path+Guid.NewGuid() + Path.GetExtension(file.FileName); 
+                using var stream = new FileStream(imageName, FileMode.Create);
                 file.CopyToAsync(stream);
+                result.Add(imageName);
             }
             return new SuccessDataResult<List<string>>(result, "File Uploaded");
         }
