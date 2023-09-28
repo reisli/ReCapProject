@@ -1,14 +1,12 @@
 ﻿
-
-
 using Business.Concrete;
-using DataAccess.Concrete.InMemory;
+using DataAccess.Concrete.EntityFramework;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 
-CarManager carManager = new CarManager(new InMemoryCarDal());
+CarManager carManager = new CarManager(new EfCarDal());
 
-//foreach (var item in carManager.GetAll())
-//{
-//    Console.WriteLine(item.CarId+ " " +  item.Description + " " + item.ModelYear);
-//}
 
-Console.WriteLine(carManager.GetById(3).Description);
+foreach (var item in carManager.GetCarDetail())
+{
+    Console.WriteLine(string.Format("{0} , {1} , {2}  {3}",item.CarId,item.BrandName,item.ColorName,item.DailyPrice));
+}
