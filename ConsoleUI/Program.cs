@@ -3,10 +3,23 @@ using Business.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 
-CarManager carManager = new CarManager(new EfCarDal());
+
+UserManager userManager = new(new EfUserDal());
+
+userManager.Add(new() { FirstName = "Ulvi", LastName = "Raisli", Email = "Ulvi.Raisli@mail.ru", Password = "12345" });
 
 
-foreach (var item in carManager.GetCarDetail())
+CustomerManager customerManager = new(new EfCustomerDal());
+
+var result = customerManager.Add(new() { CompanyName = "DOST-MMC", UserID = 1 });
+
+if (result.Success)
 {
-    Console.WriteLine(string.Format("{0} , {1} , {2}  {3}",item.CarId,item.BrandName,item.ColorName,item.DailyPrice));
+    Console.WriteLine(result.Message);
 }
+else
+{
+    Console.WriteLine(result.Message);
+}
+
+
