@@ -5,11 +5,11 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Utilities
+namespace Core.Utilities.Results
 {
-    public class SuccessDataResult<T>:DataResult<T>
+    public class SuccessDataResult<T> : DataResult<T>
     {
-        public SuccessDataResult(T data,string message):base(data,true,message) { }
+        public SuccessDataResult(T data, string message) : base(data, true, message) { }
 
         public SuccessDataResult(T data) : base(data, true) { }
 
