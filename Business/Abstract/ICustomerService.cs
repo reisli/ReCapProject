@@ -11,5 +11,6 @@ namespace Business.Abstract
     public interface ICustomerService
     {
         IResult Add(Customer customer);
+        IDataResult<List<Customer>> GetCustomers();
     }
 }

@@ -32,5 +32,10 @@ namespace Business.Concrete
             }
                 
         }
+
+        public IDataResult<List<Customer>> GetCustomers()
+        {
+            return new SuccessDataResult<List<Customer>>(_customerDal.GetAll());
+        }
     }
 }
